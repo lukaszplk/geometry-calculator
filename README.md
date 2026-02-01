@@ -1,36 +1,89 @@
-# virtual_methods
-Circle, square, rectangle, triangle
+# geometry-calculator
 
-Enter how many figures do u want create.
+Calculate perimeter and area of geometric figures using polymorphism.
 
-You can choose between:  
-c - circle  
-s - square  
-r - rectangle  
-t - triangle  
+## Supported Shapes
 
-After pick figure u are suppose to pass some parameters:
-one for circle and square, respectively radius and square's side,
-two for rectangle to specify two rectangle's sides
-three for triangle for each triangle's side
+| Shape | Code | Parameters | Perimeter | Area |
+|-------|------|------------|-----------|------|
+| Circle | `c` | radius | 2πr | πr² |
+| Square | `s` | side | 4s | s² |
+| Rectangle | `r` | width, height | 2(w+h) | w×h |
+| Triangle | `t` | a, b, c (sides) | a+b+c | Heron's formula |
 
-Then u can specify how many calc u want to do. There are p for perimeter and a for area.
+## Build
 
-U are suppose to choose right operation and enter for which figure do u want do calcs. (indexing since 1)
+```bash
+mkdir build && cd build
+cmake ..
+cmake --build .
+```
 
-For example:  
-Number of figures: 2  
-c  
-2  
-t  
-1 2 3  
-3  
-p  
-1  
-output: 12.56  
-p  
-2  
-output: 6.00  
-a  
-1  
-output: 12.56  
+Requires C++20 (for `std::numbers::pi`).
+
+## Usage
+
+```bash
+./geometry_calculator < input.txt
+```
+
+### Input Format
+
+```
+<number_of_figures>
+<figure_type> <params...>
+...
+<number_of_queries>
+<query_type> <figure_index>
+...
+```
+
+### Query Types
+
+- `p <index>` - Calculate perimeter (1-based index)
+- `a <index>` - Calculate area (1-based index)
+
+## Example
+
+```
+4
+c 5
+s 4
+r 3 7
+t 3 4 5
+6
+p 1
+a 1
+p 2
+a 2
+p 3
+a 4
+```
+
+Output:
+```
+31.42
+78.54
+16.00
+16.00
+20.00
+6.00
+```
+
+## Project Structure
+
+```
+geometry-calculator/
+├── CMakeLists.txt
+├── include/geometry/
+│   ├── figure.hpp       # Abstract base class
+│   ├── shapes.hpp       # Circle, Square, Rectangle, Triangle
+│   ├── factory.hpp      # FigureFactory
+│   └── collection.hpp   # FigureCollection
+├── src/main.cpp
+└── examples/input.txt
+```
+
+## License
+
+See [LICENSE](LICENSE) file.

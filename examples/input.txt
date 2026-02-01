@@ -1,0 +1,38 @@
+# Example input for geometry-calculator
+# Run with: geometry_calculator < examples/input.txt
+
+# First: number of figures to create
+4
+
+# Figure definitions:
+# c <radius>           - Circle
+# s <side>             - Square
+# r <width> <height>   - Rectangle
+# t <a> <b> <c>        - Triangle (three sides)
+
+c 5
+s 4
+r 3 7
+t 3 4 5
+
+# Number of queries
+6
+
+# Queries:
+# p <index>  - Calculate perimeter (1-based index)
+# a <index>  - Calculate area (1-based index)
+
+p 1
+a 1
+p 2
+a 2
+p 3
+a 4
+
+# Expected output:
+# 31.42  (circle perimeter: 2 * pi * 5)
+# 78.54  (circle area: pi * 5^2)
+# 16.00  (square perimeter: 4 * 4)
+# 16.00  (square area: 4^2)
+# 20.00  (rectangle perimeter: 2*(3+7))
+# 6.00   (triangle area: 3-4-5 right triangle)
